@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">tripster</string>
+    <string name="app_name">Tripster</string>
+    <string name="welcome_string">Hello Tripster</string>
 </resources>

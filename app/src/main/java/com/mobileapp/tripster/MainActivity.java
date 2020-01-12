@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         ConnectionService service = retrofit.create(ConnectionService.class);
 
-        service.searchConnections("Bern", "Zürich").enqueue(new Callback<ConnectionContainerDto>() {
+        service.searchConnections(from, to).enqueue(new Callback<ConnectionContainerDto>() {
 
             @Override
             public void onResponse(Call<ConnectionContainerDto> call, Response<ConnectionContainerDto> response) {

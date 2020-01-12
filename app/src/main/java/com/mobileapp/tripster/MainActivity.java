@@ -2,12 +2,9 @@ package com.mobileapp.tripster;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.mobileapp.tripster.dtos.ConnectionContainerDto;
 import com.mobileapp.tripster.services.ConnectionService;
@@ -52,15 +49,17 @@ public class MainActivity extends AppCompatActivity {
 
         ConnectionService service = retrofit.create(ConnectionService.class);
 
-        service.searchConnections(from, to).enqueue(new Callback<ConnectionContainerDto>() {
+        service.searchConnections("Bern", "Zürich").enqueue(new Callback<ConnectionContainerDto>() {
 
             @Override
             public void onResponse(Call<ConnectionContainerDto> call, Response<ConnectionContainerDto> response) {
                 if (response.isSuccessful()) {
                     ConnectionContainerDto connectionsContainer = response.body();
-                    // Handle result...
 
-                    System.out.println(connectionsContainer);
+
+                    // TODO: new intent to results activity + pass 3 connections (as required)
+
+                    System.out.println(connectionsContainer.connections.get(0).from.departure.toString());
 
                     // originTime.setText(connectionsContainer.connections.get(0).from.departure.toString());
                     // destinationTime.setText(connectionsContainer.connections.get(0).to.arrival.toString());
@@ -69,7 +68,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ConnectionContainerDto> call, Throwable t) {
-                Log.d("Test", "fail");
+
+                if (t.getLocalizedMessage() != null) {
+                    Log.d("Test", t.getLocalizedMessage());
+                }
             }
         });
 

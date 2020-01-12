@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">Tripster</string>
-    <string name="welcome_string">Hello Tripster</string>
+
+    <!-- Activity Names -->
+    <string name="activity_main">Verbindungen suchen</string>
+
+
+    <string name="title_activity_launch_screen">LaunchScreen</string>
+    <string name="launch_screen_image_description">Logo von Tripster</string>
+
+
+
+    <!-- Actions -->
+    <string name="action_search">Suchen</string>
+
 </resources>

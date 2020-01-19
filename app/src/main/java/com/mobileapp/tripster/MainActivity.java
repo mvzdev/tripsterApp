@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         String from = departureTextField.getText().toString();
         String to = destinationTextField.getText().toString();
 
-        ConnectionFinder finder = new ConnectionFinder("https://transport.opendata.ch/v1/");
+        ConnectionFinder finder = new ConnectionFinder();
 
         finder.findConnections(from, to);
 

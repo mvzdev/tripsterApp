@@ -12,7 +12,7 @@ import retrofit2.Retrofit;
 
 public class ConnectionFinder {
 
-    private ConnectionContainerDto connectionList;
+    public ConnectionContainerDto connectionList;
 
     public ConnectionFinder() {
 

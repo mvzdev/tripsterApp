@@ -80,10 +80,6 @@ public class MainActivity extends AppCompatActivity {
 
         client.getLastLocation().addOnSuccessListener((Location location) -> updateLocationOnUi(location));
 
-        LocationRequest locationRequest = new LocationRequest();
-        locationRequest.setInterval(1000);
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        client.requestLocationUpdates(locationRequest, locationCallback, null);
     }
 
     @Override

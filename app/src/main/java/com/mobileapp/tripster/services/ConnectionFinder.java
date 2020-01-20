@@ -34,7 +34,7 @@ public class ConnectionFinder {
 
                     // TODO: new intent to results activity + pass 3 connections (as required)
 
-                    System.out.println(connectionList.connections.get(0).from.departure.toString());
+                    //System.out.println(connectionList.connections.get(0).from.departure.toString());
 
                     // originTime.setText(connectionsContainer.connections.get(0).from.departure.toString());
                     // destinationTime.setText(connectionsContainer.connections.get(0).to.arrival.toString());

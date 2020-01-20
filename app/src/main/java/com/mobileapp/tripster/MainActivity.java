@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -21,6 +22,8 @@ import com.google.android.gms.location.LocationServices;
 import com.mobileapp.tripster.services.ConnectionFinder;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -39,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.text_destination)
     EditText destinationTextField;
+
+    @BindView(R.id.connection_list_view)
+    ListView connectionListView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +72,13 @@ public class MainActivity extends AppCompatActivity {
         // TODO: change findConnections to return data instead of logging
         // TODO: navigate to new activity with data from findConnections
 
+        // TODO: connect with actual data
+        List<Connection> dummyConnections = Arrays.asList(new Connection(0, Date.valueOf("1999-12-1"), Date.valueOf("2020-1-1")),
+                new Connection(1, Date.valueOf("2021-3-1"), Date.valueOf("2120-4-1")),
+                new Connection(2, Date.valueOf("2050-1-1"), Date.valueOf("2300-1-5")));
 
+        ConnectionAdapter connectionAdapter = new ConnectionAdapter(this, dummyConnections);
+        connectionListView.setAdapter(connectionAdapter);
     }
 
     @Override

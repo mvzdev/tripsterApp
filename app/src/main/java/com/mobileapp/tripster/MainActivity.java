@@ -1,14 +1,18 @@
 package com.mobileapp.tripster;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -44,29 +48,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-
-
-
         // Location related
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-
-        locationCallback = new LocationCallback() {
-            @Override
-            public void onLocationResult(LocationResult locationResult) {
-                if (locationResult == null) {
-                    return;
-                }
-
-                for (Location location : locationResult.getLocations()) {
-                    updateLocationOnUi(location);
-                }
-            }
-        };
-
-        client = LocationServices.getFusedLocationProviderClient(this);
-
-        geocoder = new Geocoder(this);
-
+        // TODO: move to it's own class
+        this.setLocation();
 
     }
 
@@ -108,6 +92,25 @@ public class MainActivity extends AppCompatActivity {
         client.flushLocations();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.action_about:
+                startActivity(new Intent(this, AboutScreen.class));
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
     private void updateLocationOnUi(Location location) {
         if (location != null) {
             try {
@@ -117,6 +120,26 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    private void setLocation() {
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
+
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+
+                for (Location location : locationResult.getLocations()) {
+                    updateLocationOnUi(location);
+                }
+            }
+        };
+
+        client = LocationServices.getFusedLocationProviderClient(this);
+        geocoder = new Geocoder(this);
     }
 
 }

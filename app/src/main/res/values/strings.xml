@@ -5,6 +5,7 @@
 
     <!-- Activity Names -->
     <string name="activity_main">Verbindungen suchen</string>
+    <string name="about_screen">About Screen</string>
 
     <!-- Main Activity-->
     <string name="edit_text_departure">Abfahrtsort</string>
@@ -13,5 +14,6 @@
     <!-- Actions -->
     <string name="current_location">Aktuellen Standort wählen</string>
     <string name="action_search">Suchen</string>
+    <string name="title_activity_about_screen">AboutScreen</string>
 
 </resources>

@@ -7,7 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import butterknife.BindView;
 
-public class AboutScreen extends AppCompatActivity {
+public class AboutActivity extends AppCompatActivity {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -15,7 +15,7 @@ public class AboutScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about_screen);
+        setContentView(R.layout.activity_about);
 
         setSupportActionBar(toolbar);
 

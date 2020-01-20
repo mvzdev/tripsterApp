@@ -15,5 +15,11 @@
     <string name="current_location">Aktuellen Standort wählen</string>
     <string name="action_search">Suchen</string>
     <string name="title_activity_about_screen">AboutScreen</string>
+    <string name="about_subtitle">Developers:</string>
+    <string name="about_developer_1_name">Marc Vettiger</string>
+    <string name="about_developer_1_email">marc.vettiger@gmail.com</string>
+    <string name="about_developer_2_name">Raphael Hirscher</string>
+    <string name="about_developer_2_email">raphaelhirscher@gmail.com</string>
+    <string name="about_company_copyright">© 2020 Tripster Inc.</string>
 
 </resources>

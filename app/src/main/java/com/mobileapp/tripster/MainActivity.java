@@ -1,7 +1,6 @@
 package com.mobileapp.tripster;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
@@ -17,7 +16,6 @@ import android.widget.EditText;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.mobileapp.tripster.services.ConnectionFinder;
@@ -99,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.action_about:
-                startActivity(new Intent(this, AboutScreen.class));
+                startActivity(new Intent(this, AboutActivity.class));
                 break;
         }
 

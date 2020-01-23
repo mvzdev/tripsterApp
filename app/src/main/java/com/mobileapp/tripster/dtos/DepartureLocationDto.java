@@ -5,4 +5,6 @@ import java.util.Date;
 public class DepartureLocationDto extends LocationDto {
 
     public Date departure;
+    public LocationDto station;
+
 }

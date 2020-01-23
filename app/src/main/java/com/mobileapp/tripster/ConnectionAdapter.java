@@ -7,12 +7,15 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class ConnectionAdapter extends BaseAdapter {
 
     private Context context;
     private List<Connection> connections;
+    public static final String DATE_FORMAT_1 = "HH:mm ";
 
 
     public ConnectionAdapter(Context context, List<Connection> connections) {
@@ -45,16 +48,18 @@ public class ConnectionAdapter extends BaseAdapter {
         }
 
         Connection connection = (Connection) getItem(position);
-
-        TextView connectionId = convertView.findViewById(R.id.connection_id);
-        connectionId.setText(connection.getId() + "");
-
         TextView departureTime = convertView.findViewById(R.id.connection_departure_time);
-        departureTime.setText(connection.getDeparture().toString());
+        departureTime.setText(getFormattedDate(connection.getDeparture()));
 
         TextView arrivalTime = convertView.findViewById(R.id.connection_arrival_time);
-        arrivalTime.setText(connection.getArrival().toString());
+        arrivalTime.setText( getFormattedDate(connection.getArrival()));
 
         return convertView;
+    }
+
+    private String getFormattedDate(Date date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT_1);
+        //dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        return dateFormat.format(date);
     }
 }

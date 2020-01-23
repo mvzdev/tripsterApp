@@ -1,8 +1,5 @@
 package com.mobileapp.tripster;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -15,21 +12,29 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.mobileapp.tripster.services.ConnectionFinder;
+import com.mobileapp.tripster.api.ApiClient;
+import com.mobileapp.tripster.dtos.ConnectionContainerDto;
+import com.mobileapp.tripster.dtos.ConnectionDto;
+import com.mobileapp.tripster.services.ConnectionServiceInterface;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -61,24 +66,41 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.search)
     public void onSearchClick() {
+        // TODO: navigate to new activity with data from findConnections
+        // TODO: Show progress bar
 
         String from = departureTextField.getText().toString();
         String to = destinationTextField.getText().toString();
 
-        ConnectionFinder finder = new ConnectionFinder();
+//        ConnectionFinder finder = new ConnectionFinder();
+//        finder.findConnections(from, to);
 
-        finder.findConnections(from, to);
+        Retrofit retrofit = ApiClient.getClient();
+        ConnectionServiceInterface connectionServiceInterface = retrofit.create(ConnectionServiceInterface.class);
 
-        // TODO: change findConnections to return data instead of logging
-        // TODO: navigate to new activity with data from findConnections
+        Call<ConnectionContainerDto> call = connectionServiceInterface.searchConnections(from, to);
+        call.enqueue(new Callback<ConnectionContainerDto>() {
 
-        // TODO: connect with actual data
-        List<Connection> dummyConnections = Arrays.asList(new Connection(0, Date.valueOf("1999-12-1"), Date.valueOf("2020-1-1")),
-                new Connection(1, Date.valueOf("2021-3-1"), Date.valueOf("2120-4-1")),
-                new Connection(2, Date.valueOf("2050-1-1"), Date.valueOf("2300-1-5")));
+            @Override
+            public void onResponse(Call<ConnectionContainerDto> call, Response<ConnectionContainerDto> response) {
 
-        ConnectionAdapter connectionAdapter = new ConnectionAdapter(this, dummyConnections);
-        connectionListView.setAdapter(connectionAdapter);
+                if (response.body() != null) {
+                    List<ConnectionDto> connectionDtos = response.body().connections;
+
+                    List<Connection> connections = connectionDtos.stream()
+                            .map(c -> new Connection(c.from.departure, c.to.arrival))
+                            .collect(Collectors.toList());
+
+                    ConnectionAdapter connectionAdapter = new ConnectionAdapter(MainActivity.this, connections);
+                    connectionListView.setAdapter(connectionAdapter);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ConnectionContainerDto> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override
@@ -88,9 +110,7 @@ public class MainActivity extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-
         client.getLastLocation().addOnSuccessListener((Location location) -> updateLocationOnUi(location));
-
     }
 
     @Override
@@ -108,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.action_about:
                 startActivity(new Intent(this, AboutActivity.class));
                 break;

@@ -1,6 +1,7 @@
 package com.mobileapp.tripster;
 
 import java.util.Date;
+import java.util.Random;
 
 public class Connection {
 
@@ -8,8 +9,8 @@ public class Connection {
     private Date departure;
     private Date arrival;
 
-    public Connection(int id, Date departure, Date arrival) {
-        this.id = id;
+    public Connection(Date departure, Date arrival) {
+        this.id = new Random().nextInt();
         this.departure = departure;
         this.arrival = arrival;
     }

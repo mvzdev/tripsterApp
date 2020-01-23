@@ -8,26 +8,16 @@
     android:paddingRight="16dp"
     android:paddingTop="16dp">
 
-
-    <TextView
-        android:id="@+id/connection_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        />
-
     <TextView
         android:id="@+id/connection_departure_time"
-        android:layout_below="@id/connection_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        />
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/connection_arrival_time"
-        android:layout_below="@id/connection_id"
-        android:layout_width="wrap_content"
+        android:layout_below="@id/connection_departure_time"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true" />
+        />
 </RelativeLayout>

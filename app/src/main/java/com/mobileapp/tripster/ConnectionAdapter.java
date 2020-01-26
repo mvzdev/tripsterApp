@@ -15,7 +15,7 @@ public class ConnectionAdapter extends BaseAdapter {
 
     private Context context;
     private List<Connection> connections;
-    public static final String DATE_FORMAT_1 = "HH:mm ";
+    private static final String DATE_FORMAT_1 = "HH:mm ";
 
 
     public ConnectionAdapter(Context context, List<Connection> connections) {
@@ -51,8 +51,14 @@ public class ConnectionAdapter extends BaseAdapter {
         TextView departureTime = convertView.findViewById(R.id.connection_departure_time);
         departureTime.setText(getFormattedDate(connection.getDeparture()));
 
+        TextView departureStation = convertView.findViewById(R.id.connection_departure_station);
+        departureStation.setText(connection.getDepartureStationName());
+
         TextView arrivalTime = convertView.findViewById(R.id.connection_arrival_time);
-        arrivalTime.setText( getFormattedDate(connection.getArrival()));
+        arrivalTime.setText(getFormattedDate(connection.getArrival()));
+
+        TextView arrivalStationName = convertView.findViewById(R.id.connection_arrival_station);
+        arrivalStationName.setText(connection.getArrivalStationName());
 
         return convertView;
     }

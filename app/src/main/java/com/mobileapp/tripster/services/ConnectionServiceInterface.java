@@ -11,4 +11,8 @@ public interface ConnectionServiceInterface {
     @GET("connections")
     Call<ConnectionContainerDto> searchConnections(@Query("from") String origin, @Query("to") String destination);
 
+    @GET("connections")
+    Call<ConnectionContainerDto> searchLimitedConnections(@Query("from") String origin, @Query("to") String destination, @Query("limit") int nOfConnections);
+
+
 }

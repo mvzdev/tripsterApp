@@ -7,6 +7,7 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -37,6 +38,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
+
+    private static final String CONNECTION_SERVICE_LOG_TAG = "ConnectionService";
+    private static final int NUMBER_OF_CONNECTIONS = 3;
 
     private FusedLocationProviderClient client;
     private Geocoder geocoder;
@@ -78,17 +82,17 @@ public class MainActivity extends AppCompatActivity {
         Retrofit retrofit = ApiClient.getClient();
         ConnectionServiceInterface connectionServiceInterface = retrofit.create(ConnectionServiceInterface.class);
 
-        Call<ConnectionContainerDto> call = connectionServiceInterface.searchConnections(from, to);
+        Call<ConnectionContainerDto> call = connectionServiceInterface.searchLimitedConnections(from, to, NUMBER_OF_CONNECTIONS);
         call.enqueue(new Callback<ConnectionContainerDto>() {
 
             @Override
             public void onResponse(Call<ConnectionContainerDto> call, Response<ConnectionContainerDto> response) {
+                if (response.isSuccessful() && response.body() != null) {
 
-                if (response.body() != null) {
                     List<ConnectionDto> connectionDtos = response.body().connections;
 
                     List<Connection> connections = connectionDtos.stream()
-                            .map(c -> new Connection(c.from.departure, c.to.arrival))
+                            .map(c -> new Connection(c.from.departure, c.from.station.name , c.to.arrival, c.to.station.name))
                             .collect(Collectors.toList());
 
                     ConnectionAdapter connectionAdapter = new ConnectionAdapter(MainActivity.this, connections);
@@ -98,7 +102,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ConnectionContainerDto> call, Throwable t) {
-
+                if (t.getLocalizedMessage() != null) {
+                    Log.e(CONNECTION_SERVICE_LOG_TAG, t.getLocalizedMessage());
+                }
             }
         });
     }

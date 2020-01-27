@@ -7,7 +7,6 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -15,36 +14,29 @@ import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.mobileapp.tripster.api.ApiClient;
-import com.mobileapp.tripster.dtos.ConnectionContainerDto;
-import com.mobileapp.tripster.dtos.ConnectionDto;
-import com.mobileapp.tripster.services.ConnectionServiceInterface;
+import com.mobileapp.tripster.viewmodels.ConnectionViewModel;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String CONNECTION_SERVICE_LOG_TAG = "ConnectionService";
     private static final int NUMBER_OF_CONNECTIONS = 3;
 
     private FusedLocationProviderClient client;
     private Geocoder geocoder;
     private LocationCallback locationCallback;
+    private ConnectionViewModel connectionsViewModel;
 
     @BindView(R.id.text_departure)
     EditText departureTextField;
@@ -66,6 +58,14 @@ public class MainActivity extends AppCompatActivity {
         // TODO: move to it's own class
         this.setLocation();
 
+
+        this.connectionsViewModel = ViewModelProviders.of(this)
+                .get(ConnectionViewModel.class);
+
+        this.connectionsViewModel.getConnections().observe(this, connections -> {
+            ConnectionAdapter connectionAdapter = new ConnectionAdapter(MainActivity.this, connections);
+            connectionListView.setAdapter(connectionAdapter);
+        });
     }
 
     @OnClick(R.id.search)
@@ -76,37 +76,13 @@ public class MainActivity extends AppCompatActivity {
         String from = departureTextField.getText().toString();
         String to = destinationTextField.getText().toString();
 
-//        ConnectionFinder finder = new ConnectionFinder();
-//        finder.findConnections(from, to);
+        connectionsViewModel.searchLimitedConnections(from, to, NUMBER_OF_CONNECTIONS);
 
-        Retrofit retrofit = ApiClient.getClient();
-        ConnectionServiceInterface connectionServiceInterface = retrofit.create(ConnectionServiceInterface.class);
-
-        Call<ConnectionContainerDto> call = connectionServiceInterface.searchLimitedConnections(from, to, NUMBER_OF_CONNECTIONS);
-        call.enqueue(new Callback<ConnectionContainerDto>() {
-
-            @Override
-            public void onResponse(Call<ConnectionContainerDto> call, Response<ConnectionContainerDto> response) {
-                if (response.isSuccessful() && response.body() != null) {
-
-                    List<ConnectionDto> connectionDtos = response.body().connections;
-
-                    List<Connection> connections = connectionDtos.stream()
-                            .map(c -> new Connection(c.from.departure, c.from.station.name , c.to.arrival, c.to.station.name))
-                            .collect(Collectors.toList());
-
-                    ConnectionAdapter connectionAdapter = new ConnectionAdapter(MainActivity.this, connections);
-                    connectionListView.setAdapter(connectionAdapter);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ConnectionContainerDto> call, Throwable t) {
-                if (t.getLocalizedMessage() != null) {
-                    Log.e(CONNECTION_SERVICE_LOG_TAG, t.getLocalizedMessage());
-                }
-            }
+        this.connectionsViewModel.getConnections().observe(this, connections -> {
+            ConnectionAdapter connectionAdapter = new ConnectionAdapter(MainActivity.this, connections);
+            connectionListView.setAdapter(connectionAdapter);
         });
+
     }
 
     @Override
@@ -117,6 +93,11 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         client.getLastLocation().addOnSuccessListener((Location location) -> updateLocationOnUi(location));
+
+        this.connectionsViewModel.getConnections().observe(this, connections -> {
+            ConnectionAdapter connectionAdapter = new ConnectionAdapter(MainActivity.this, connections);
+            connectionListView.setAdapter(connectionAdapter);
+        });
     }
 
     @Override

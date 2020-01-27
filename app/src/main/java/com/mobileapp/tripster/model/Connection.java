@@ -1,4 +1,4 @@
-package com.mobileapp.tripster;
+package com.mobileapp.tripster.model;
 
 import java.util.Date;
 import java.util.Random;

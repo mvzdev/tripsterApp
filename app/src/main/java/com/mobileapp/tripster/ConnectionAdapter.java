@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.mobileapp.tripster.model.Connection;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;

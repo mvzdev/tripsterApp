@@ -14,7 +14,7 @@
     <!-- Actions -->
     <string name="current_location">Aktuellen Standort wählen</string>
     <string name="action_search">Suchen</string>
-    <string name="title_activity_about_screen">AboutScreen</string>
+    <string name="title_activity_about_screen">About</string>
     <string name="about_subtitle">Developers:</string>
     <string name="about_developer_1_name">Marc Vettiger</string>
     <string name="about_developer_1_email">marc.vettiger@gmail.com</string>

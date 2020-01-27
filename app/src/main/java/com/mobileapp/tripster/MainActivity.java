@@ -9,8 +9,10 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -47,12 +49,15 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.connection_list_view)
     ListView connectionListView;
 
+    @BindView(R.id.indeterminateBar)
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        progressBar.setVisibility(View.GONE);
 
         // Location related
         // TODO: move to it's own class
@@ -70,19 +75,17 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.search)
     public void onSearchClick() {
-        // TODO: navigate to new activity with data from findConnections
-        // TODO: Show progress bar
+        progressBar.setVisibility(View.VISIBLE);
 
         String from = departureTextField.getText().toString();
         String to = destinationTextField.getText().toString();
-
         connectionsViewModel.searchLimitedConnections(from, to, NUMBER_OF_CONNECTIONS);
 
         this.connectionsViewModel.getConnections().observe(this, connections -> {
             ConnectionAdapter connectionAdapter = new ConnectionAdapter(MainActivity.this, connections);
             connectionListView.setAdapter(connectionAdapter);
+            progressBar.setVisibility(View.GONE);
         });
-
     }
 
     @Override

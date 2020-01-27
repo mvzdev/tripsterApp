@@ -22,6 +22,7 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".LaunchScreen"
+            android:noHistory="true"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:launchMode="standard"
             android:theme="@style/FullscreenTheme">

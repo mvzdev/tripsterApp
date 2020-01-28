@@ -1,4 +1,4 @@
-package com.mobileapp.tripster;
+package com.mobileapp.tripster.repositories;
 
 import androidx.lifecycle.LiveData;
 

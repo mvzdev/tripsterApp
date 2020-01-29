@@ -60,7 +60,21 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @OnClick(R.id.search)
+    @OnClick(R.id.current_location)
+    public void onCurrentLocationClick() {
+
+    }
+
+    @OnClick(R.id.switch_selection)
+    public void onSwitchSelectionClick() {
+        String departure = departureTextField.getText().toString();
+        String destination = destinationTextField.getText().toString();
+        departureTextField.setText(destination);
+        destinationTextField.setText(departure);
+
+    }
+
+    @OnClick(R.id.submit_search)
     public void onSearchClick() {
         progressBar.setVisibility(View.VISIBLE);
         String from = departureTextField.getText().toString();

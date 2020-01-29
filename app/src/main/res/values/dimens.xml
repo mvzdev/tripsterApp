@@ -6,7 +6,11 @@
 
     <dimen name="table_padding_small">4dp</dimen>
 
+    <!-- Inputs -->
+    <dimen name="input_height">48dp</dimen>
+
     <!-- Buttons -->
-    <dimen name="button_general_height">48dp</dimen>
+    <dimen name="button_defined_height">48dp</dimen>
+    <dimen name="button_defined_width">72dp</dimen>
 
 </resources>

@@ -10,6 +10,10 @@
     <!-- Main Activity-->
     <string name="edit_text_departure">Abfahrtsort</string>
     <string name="edit_text_destination">Zielort</string>
+    <string name="edit_text_time">Uhrzeit</string>
+
+    <!-- Button Descriptions -->
+    <string name="button_switch_selection">Auswahl umkehren</string>
 
     <!-- Actions -->
     <string name="current_location">Aktuellen Standort wählen</string>

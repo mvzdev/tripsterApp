@@ -14,6 +14,7 @@
 
     <!-- Button Descriptions -->
     <string name="button_switch_selection">Auswahl umkehren</string>
+    <string name="button_current_location">Momentaner Standort</string>
 
     <!-- Actions -->
     <string name="current_location">Aktuellen Standort wählen</string>

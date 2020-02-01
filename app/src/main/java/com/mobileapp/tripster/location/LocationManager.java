@@ -1,16 +1,10 @@
 package com.mobileapp.tripster.location;
 
-import android.Manifest;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
-import android.widget.Toast;
 
-import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -19,7 +13,6 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.mobileapp.tripster.R;
 
 import java.io.IOException;
 import java.util.List;
@@ -28,12 +21,9 @@ public class LocationManager {
 
     private FusedLocationProviderClient client;
     private Geocoder geocoder;
-    private Activity activity;
     private LocationCallback locationCallback;
 
     public LocationManager(Activity activity) {
-        this.activity = activity;
-
         client = LocationServices.getFusedLocationProviderClient(activity);
         geocoder = new Geocoder(activity);
 

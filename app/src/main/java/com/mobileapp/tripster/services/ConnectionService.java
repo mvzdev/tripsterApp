@@ -12,7 +12,7 @@ public interface ConnectionService {
     Call<ConnectionContainerDto> searchConnections(@Query("from") String origin, @Query("to") String destination);
 
     @GET("connections")
-    Call<ConnectionContainerDto> searchLimitedConnections(@Query("from") String origin, @Query("to") String destination, @Query("limit") int nOfConnections);
+    Call<ConnectionContainerDto> searchLimitedConnections(@Query("from") String origin, @Query("to") String destination, @Query("time") String time, @Query("limit") int nOfConnections);
 
 
 }

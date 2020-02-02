@@ -8,6 +8,7 @@
 
     <!-- Inputs -->
     <dimen name="input_height">48dp</dimen>
+    <dimen name="input_width_time">96dp</dimen>
 
     <!-- Buttons -->
     <dimen name="button_defined_height">48dp</dimen>

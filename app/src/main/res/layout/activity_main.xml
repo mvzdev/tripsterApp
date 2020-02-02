@@ -1,18 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:orientation="vertical"
+    android:padding="@dimen/activity_general_padding"
+    android:theme="@style/AppTheme"
+    tools:context=".MainActivity"
+    >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <ImageButton
+        android:id="@+id/current_location"
+        android:layout_width="@dimen/button_defined_width"
+        android:layout_height="@dimen/button_defined_height"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:background="@color/colorPrimary"
+        android:contentDescription="@string/button_current_location"
+        android:src="@drawable/ic_my_location_white_24dp"
+        android:textColor="@color/colorWhite"
+        />
+
+    <EditText
+        android:id="@+id/text_departure"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/input_height"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_toEndOf="@id/current_location"
+        android:autofillHints="@string/edit_text_departure"
+        android:hint="@string/edit_text_departure"
+        android:inputType="text"
+        android:maxLines="1"
+        />
+
+    <ImageButton
+        android:id="@+id/switch_selection"
+        android:layout_width="@dimen/button_defined_width"
+        android:layout_height="@dimen/button_defined_height"
+        android:layout_below="@id/current_location"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:background="@color/colorPrimary"
+        android:contentDescription="@string/button_switch_selection"
+        android:src="@drawable/ic_import_export_white_36dp"
+        android:textColor="@color/colorWhite"
+        />
+
+    <EditText
+        android:id="@+id/text_destination"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/input_height"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:layout_below="@id/text_departure"
+        android:layout_toEndOf="@id/switch_selection"
+        android:autofillHints="@string/edit_text_destination"
+        android:hint="@string/edit_text_destination"
+        android:inputType="text"
+        android:maxLines="1"
+        />
+
+    <EditText
+        android:id="@+id/time_input"
+        android:layout_width="@dimen/input_width_time"
+        android:layout_height="@dimen/input_height"
+        android:layout_below="@id/text_destination"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:autofillHints="@string/edit_text_time"
+        android:hint="@string/edit_text_time"
+        android:inputType="text"
+        android:maxLines="1"
+        />
+
+    <EditText
+        android:id="@+id/via_input"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/input_height"
+        android:layout_below="@id/text_destination"
+        android:layout_toEndOf="@id/time_input"
+        android:hint="@string/edit_text_via"
+        android:autofillHints="@string/edit_text_via"
+        android:inputType="text"
+        android:maxLines="1"
+        />
+
+    <Button
+        android:id="@+id/submit_search"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_defined_height"
+        android:layout_below="@id/time_input"
+        android:background="@color/colorPrimary"
+        android:text="@string/action_search"
+        android:textColor="@color/colorWhite"
+        />
+
+    <ProgressBar
+        android:id="@+id/indeterminateBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_below="@id/submit_search"
+        android:indeterminate="true"
+        />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ListView
+        android:id="@+id/connection_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/indeterminateBar"
+        />
+
+</RelativeLayout>

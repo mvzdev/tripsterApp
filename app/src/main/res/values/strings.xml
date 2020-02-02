@@ -1,3 +1,39 @@
 <resources>
-    <string name="app_name">tripster</string>
+    <string name="app_name">Tripster</string>
+    <string name="title_activity_launch_screen">LaunchScreen</string>
+    <string name="launch_screen_image_description">Logo von Tripster</string>
+
+    <!-- Activity Names -->
+    <string name="activity_main">Verbindungen suchen</string>
+    <string name="about_screen">About Screen</string>
+
+    <!-- Main Activity-->
+    <string name="edit_text_departure">Abfahrtsort</string>
+    <string name="edit_text_destination">Zielort</string>
+    <string name="edit_text_time">Uhrzeit</string>
+    <string name="edit_text_via">Via</string>
+
+    <!-- Button Descriptions -->
+    <string name="button_switch_selection">Auswahl umkehren</string>
+    <string name="button_current_location">Momentaner Standort</string>
+    <string name="button_okay">OK</string>
+    <string name="button_cancel">Abbrechen</string>
+
+    <!-- Permission related -->
+    <string name="permission_granted_location">Zugriff auf Standort gewährt</string>
+    <string name="permission_denied_location">Zugriff auf Standort verwehrt</string>
+    <string name="grant_permission_location_title">Zugriff auf Standort</string>
+    <string name="grant_permission_location">Möchtest du, dass diese App deinen Standort benutzen darf?</string>
+
+    <!-- Actions -->
+    <string name="current_location">Aktuellen Standort wählen</string>
+    <string name="action_search">Suchen</string>
+    <string name="title_activity_about_screen">About</string>
+    <string name="about_subtitle">Developers:</string>
+    <string name="about_developer_1_name">Marc Vettiger</string>
+    <string name="about_developer_1_email">marc.vettiger@gmail.com</string>
+    <string name="about_developer_2_name">Raphael Hirscher</string>
+    <string name="about_developer_2_email">raphaelhirscher@gmail.com</string>
+    <string name="about_company_copyright">© 2020 Tripster Inc.</string>
+
 </resources>

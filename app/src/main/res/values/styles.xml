@@ -8,4 +8,33 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="FullscreenTheme" parent="AppTheme">
+        <item name="android:windowActionBarOverlay">false</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
+        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
+    </style>
+
+
+    <!-- Buttons -->
+    <style name="ButtonStylesDimens">
+        <item name="android:layout_height">@dimen/button_defined_height</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="ButtonStylesColoringPrimary">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:color">@color/colorWhite</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
 </resources>

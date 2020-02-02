@@ -1,8 +1,6 @@
 package com.mobileapp.tripster;
 
 import android.Manifest;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -20,7 +18,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.mobileapp.tripster.location.LocationManager;
+import com.mobileapp.tripster.helpers.LocationManager;
 import com.mobileapp.tripster.model.Connection;
 import com.mobileapp.tripster.viewmodels.ConnectionViewModel;
 
@@ -45,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.time_input)
     EditText timeInput;
 
+    @BindView(R.id.via_input)
+    EditText viaInput;
+
     @BindView(R.id.connection_list_view)
     ListView connectionListView;
 
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(View.INVISIBLE);
 
         locationManager = new LocationManager(this);
         connectionsViewModel = ViewModelProviders.of(this).get(ConnectionViewModel.class);
@@ -88,11 +89,12 @@ public class MainActivity extends AppCompatActivity {
         String from = departureTextField.getText().toString();
         String to = destinationTextField.getText().toString();
         String time = timeInput.getText().toString();
-        connectionsViewModel.searchLimitedConnections(from, to, time, NUMBER_OF_CONNECTIONS);
+        String via = viaInput.getText().toString();
+        connectionsViewModel.searchLimitedConnections(from, to, time, via, NUMBER_OF_CONNECTIONS);
 
         connectionsViewModel.connections.observe(this, connections -> {
             setupConnectionAdapter(connections);
-            progressBar.setVisibility(View.GONE);
+            progressBar.setVisibility(View.INVISIBLE);
             view.setEnabled(true);
         });
     }

@@ -1,4 +1,4 @@
-package com.mobileapp.tripster.location;
+package com.mobileapp.tripster.helpers;
 
 import android.app.Activity;
 import android.location.Address;

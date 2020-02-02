@@ -11,6 +11,7 @@
     <string name="edit_text_departure">Abfahrtsort</string>
     <string name="edit_text_destination">Zielort</string>
     <string name="edit_text_time">Uhrzeit</string>
+    <string name="edit_text_via">Via</string>
 
     <!-- Button Descriptions -->
     <string name="button_switch_selection">Auswahl umkehren</string>

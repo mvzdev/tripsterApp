@@ -25,9 +25,9 @@ public class ConnectionViewModel extends AndroidViewModel {
 
     }
 
-    public void searchLimitedConnections(String from, String to, String time, int nOfConnections) {
+    public void searchLimitedConnections(String from, String to, String time, String via, int nOfConnections) {
         this.connections = this.connectionRepository
-                .searchLimitedConnection(from, to, time, nOfConnections);
+                .searchLimitedConnection(from, to, time, via, nOfConnections);
     }
 
     public LiveData<List<Connection>> getConnections() {

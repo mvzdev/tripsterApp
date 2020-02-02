@@ -9,10 +9,19 @@ import retrofit2.http.Query;
 public interface ConnectionService {
 
     @GET("connections")
-    Call<ConnectionContainerDto> searchConnections(@Query("from") String origin, @Query("to") String destination);
+    Call<ConnectionContainerDto> searchConnections(
+            @Query("from") String origin,
+            @Query("to") String destination
+    );
 
     @GET("connections")
-    Call<ConnectionContainerDto> searchLimitedConnections(@Query("from") String origin, @Query("to") String destination, @Query("limit") int nOfConnections);
+    Call<ConnectionContainerDto> searchLimitedConnections(
+            @Query("from") String origin,
+            @Query("to") String destination,
+            @Query("time") String time,
+            @Query("via") String via,
+            @Query("limit") int nOfConnections
+    );
 
 
 }

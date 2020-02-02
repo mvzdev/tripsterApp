@@ -5,10 +5,10 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.mobileapp.tripster.model.Connection;
 import com.mobileapp.tripster.api.ApiClient;
 import com.mobileapp.tripster.dtos.ConnectionContainerDto;
 import com.mobileapp.tripster.dtos.ConnectionDto;
+import com.mobileapp.tripster.model.Connection;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +18,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
-public class ConnectionWebService  {
+public class ConnectionWebService {
 
     private ConnectionService connectionService;
     private static final String CONNECTION_SERVICE_LOG_TAG = "ConnectionService";
@@ -28,10 +28,10 @@ public class ConnectionWebService  {
         this.connectionService = retrofit.create(ConnectionService.class);
     }
 
-    public LiveData<List<Connection>> searchLimitedConnections(String from, String to, int nOfConnections) {
+    public LiveData<List<Connection>> searchLimitedConnections(String from, String to, String time, String via, int nOfConnections) {
         final MutableLiveData<List<Connection>> data = new MutableLiveData<>();
 
-        Call<ConnectionContainerDto> call = connectionService.searchLimitedConnections(from, to, nOfConnections);
+        Call<ConnectionContainerDto> call = connectionService.searchLimitedConnections(from, to, time, via, nOfConnections);
         call.enqueue(new Callback<ConnectionContainerDto>() {
 
             @Override
